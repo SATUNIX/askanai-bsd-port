@@ -3,7 +3,8 @@
 ## Overview
 
 "Ask an AI" is pretty straightforward; This is a tool for asking an AI a question from the shell.
-Currently uses OpenAI exclusively.
+Currently uses OpenAI exclusively. OpenAI ships their own shell tool that is far more feature-complete,
+this tool trims all those features in favor of a simple interface.
 
 ## Installation
 

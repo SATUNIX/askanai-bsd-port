@@ -11,4 +11,6 @@ if [ -f ${HOME}/.bash_profile ]; then
   pip install -r requirements.txt
   echo "Model parameters are set to defaults."
   echo "Reload your shell, and enter \"aai <prompt>\" to ask a question."
+else
+  echo "~/.bash_profile not present, no changes made."
 fi

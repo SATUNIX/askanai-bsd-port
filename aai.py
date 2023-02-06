@@ -3,6 +3,7 @@ import argparse
 import openai
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--pr", help="review a PR")
 parser.add_argument("prompt", help="prompt for OpenAI", nargs="+")
 args = parser.parse_args()
 args.prompt = " ".join(args.prompt)

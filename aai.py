@@ -17,9 +17,9 @@ if args.pr is not None:
   pr = g.get_repo(repo).get_pull(pull)
   prompt_pr = ''
   for file in pr.get_files():
-    contents = requests.get(file.raw_data['raw_url']).content
-    prompt_pr = prompt_pr + ' \n ' + contents.decode("utf-8")  # TODO: ew
-  args.prompt = 'Review the following code for any possible bugs, errors, or improvements, and provide a detailed summary of the findings with a simple explanation: ' + prompt_pr
+    patch = file.raw_data['patch']
+    prompt_pr = prompt_pr + ' \n ' + patch#.decode("utf-8")  # TODO: ew
+  args.prompt = 'Review the following code for any possible bugs, errors, or improvements: ' + prompt_pr
 
 if args.prompt is not None:
   args.prompt = " ".join(args.prompt)

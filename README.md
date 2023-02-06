@@ -15,6 +15,8 @@ Have your OpenAI API key handy
 ## Usage
 
 The parameters are stored in `.bash_profile`. 
+Simply type `aai <prompt>` eg `aai create a python function that generates the fibonacci sequence`.
+
 The default model is `code-cushman-001`, which is tuned for fast code completion.
 For information on other models: https://platform.openai.com/docs/models
 

@@ -16,6 +16,7 @@ Have your OpenAI API key handy
 
 The parameters are stored in `.bash_profile`. 
 The default model is `code-cushman-001`, which is tuned for fast code completion.
+For information on other models: https://platform.openai.com/docs/models
 
 ## Development
 

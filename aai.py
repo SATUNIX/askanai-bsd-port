@@ -1,6 +1,5 @@
 import os
 import argparse
-import json
 import openai
 
 parser = argparse.ArgumentParser()

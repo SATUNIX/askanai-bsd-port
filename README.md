@@ -8,7 +8,7 @@ this tool trims all those features in favor of a simple interface.
 
 ## Installation
 
-Have your OpenAI API key handy
+Have your OpenAI API key and GitHub Personal Access Token handy.
 
 `bash install.sh`
 
@@ -18,7 +18,7 @@ To do a generic prompt, simply type `aai <prompt>` eg `aai create a python funct
 
 To review a PR, type `aaipr <PR_URL>`.
 There are fairly severe limitations on how long your prompt/response can be (4097 tokens),
-so for the PR review function to be truly useful, we'll need longer token constraints :(
+if your PR review fails, it's probably because the PR was too big to fit in the prompt.
 
 Tunable parameters are stored in `~/.aai`.
 

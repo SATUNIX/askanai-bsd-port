@@ -2,6 +2,9 @@ import os
 import argparse
 import openai
 
+import warnings
+warnings.filterwarnings("ignore")
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--pr', help='review a PR', required=False)
@@ -12,8 +15,6 @@ args = parser.parse_args()
 max_tokens = int(os.getenv('OPENAI_MAX_TOKENS'))
 
 if args.pr is not None:
-  import sys
-  from transformers import GPT2TokenizerFast
   from github import Github
   g = Github(os.getenv('AAI_GITHUB_ACCESS_TOKEN'))
   repo = '/'.join(args.pr.split('/')[3:5])  # TODO: this is dumb, make it smart
@@ -21,10 +22,9 @@ if args.pr is not None:
   pr = g.get_repo(repo).get_pull(pull)
   prompt_pr = ''
   for file in pr.get_files():
-    prompt_pr = prompt_pr + ' \n ' + file.patch
-  args.prompt = 'Review the following patch changes for any possible bugs, errors, or improvements, and provide a summary of the findings: ' + prompt_pr
-  print(GPT2TokenizerFast.from_pretrained('gpt2')(args.prompt))
-  max_tokens = max_tokens - GPT2TokenizerFast.from_pretrained('gpt2')(args.prompt)
+    prompt_pr = prompt_pr + '\n ' + file.patch
+  args.prompt = 'Review the following git patch changes for any possible bugs, errors, or improvements, and provide a summary of the findings: ' + prompt_pr
+  max_tokens = max_tokens - len(args.prompt)
 
 if args.prompt is not None:
   args.prompt = ' '.join(args.prompt)

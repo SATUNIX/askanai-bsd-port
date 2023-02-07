@@ -15,7 +15,6 @@ if [ -f ${HOME}/.bash_profile ]; then
   echo "alias aaipr='python $PWD/aai.py --pr '" >> ~/.aai
   echo "source ~/.aai" >> ~/.bash_profile
   pip install -r requirements.txt
-  echo "Model parameters are set to defaults."
   echo "Reload your shell, and enter \"aai <prompt>\" to ask a question, or \"aaipr <PR_URL>\" to review a PR."
 else
   echo "~/.bash_profile not present, no changes made."

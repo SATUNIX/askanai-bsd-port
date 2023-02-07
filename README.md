@@ -14,10 +14,17 @@ Have your OpenAI API key handy
 
 ## Usage 
 
-Simply type `aai <prompt>` eg `aai create a python function that generates the fibonacci sequence`.
+To do a generic prompt, simply type `aai <prompt>` eg `aai create a python function that generates the fibonacci sequence`.
 
-The parameters are stored in `.bash_profile`.
-The default model is `code-cushman-001`, which is tuned for fast code completion.
+To review a PR, type `aaipr <PR_URL>`.
+There are fairly severe limitations on how long your prompt/response can be (4097 tokens),
+so for the PR review function to be truly useful, we'll need longer token constraints :(
+
+Tunable parameters are stored in `~/.aai`.
+
+The default model is `text-davinci-003`, 
+which supports both use cases, but can be changed for whatever you're using most.
+
 For information on other models: https://platform.openai.com/docs/models
 
 ## Development

@@ -25,6 +25,8 @@ if args.pr is not None:
     prompt_pr = prompt_pr + '\n ' + file.patch
   args.prompt = 'Review the following git patch changes for any possible bugs, errors, or improvements, and provide a summary of the findings: ' + prompt_pr
   max_tokens = max_tokens - len(args.prompt)
+  if max_tokens < 0:
+    print('prompt was too big ('+str(len(args.prompt))+'): '+args.prompt)
 
 if args.prompt is not None:
   args.prompt = ' '.join(args.prompt)

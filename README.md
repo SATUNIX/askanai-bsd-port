@@ -17,6 +17,8 @@ Have your OpenAI API key handy
 To do a generic prompt, simply type `aai <prompt>` eg `aai create a python function that generates the fibonacci sequence`.
 
 To review a PR, type `aaipr <PR_URL>`.
+There are fairly severe limitations on how long your prompt/response can be (4097 tokens),
+so for the PR review function to be truly useful, we'll need longer token constraints :(
 
 Tunable parameters are stored in `~/.aai`.
 

@@ -9,6 +9,7 @@ parser.add_argument("--prompt", help="prompt for OpenAI", nargs="+", required=Fa
 args = parser.parse_args()
 
 if args.pr is not None:
+  import sys
   from github import Github
   g = Github(os.getenv("AAI_GITHUB_ACCESS_TOKEN"))
   repo = '/'.join(args.pr.split('/')[3:5])  # TODO: this is dumb, make it smart
@@ -16,7 +17,9 @@ if args.pr is not None:
   pr = g.get_repo(repo).get_pull(pull)
   prompt_pr = ''
   for file in pr.get_files():
-    patch = file.patch
+    print(file.raw_data)
+    sys.exit(0)
+    patch = file.raw_data['']
     prompt_pr = prompt_pr + ' \n ' + patch
   args.prompt = 'Review the following patch changes for any possible bugs, errors, or improvements: ' + prompt_pr
 

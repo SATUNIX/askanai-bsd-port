@@ -1,6 +1,8 @@
 import os
+import sys
 import argparse
 import openai
+from github import Github
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -15,7 +17,6 @@ args = parser.parse_args()
 max_tokens = int(os.getenv('OPENAI_MAX_TOKENS'))
 
 if args.pr is not None:
-  from github import Github
   g = Github(os.getenv('AAI_GITHUB_ACCESS_TOKEN'))
   repo = '/'.join(args.pr.split('/')[3:5])  # TODO: this is dumb, make it smart
   pull = int(args.pr.split('/')[-1])  # TODO: dumb-ish
@@ -27,6 +28,7 @@ if args.pr is not None:
   max_tokens = max_tokens - len(args.prompt)
   if max_tokens < 0:
     print('prompt was too big ('+str(len(args.prompt))+'): '+args.prompt)
+    sys.exit(1)
 
 if args.prompt is not None:
   args.prompt = ' '.join(args.prompt)

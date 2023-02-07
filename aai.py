@@ -9,7 +9,6 @@ parser.add_argument("--prompt", help="prompt for OpenAI", nargs="+", required=Fa
 args = parser.parse_args()
 
 if args.pr is not None:
-  import nltk
   from github import Github
   g = Github(os.getenv("AAI_GITHUB_ACCESS_TOKEN"))
   repo = '/'.join(args.pr.split('/')[3:5])  # TODO: this is dumb, make it smart
@@ -29,7 +28,6 @@ response = openai.Completion.create(
   model=os.getenv("OPENAI_MODEL"),
   prompt=args.prompt,
   temperature=float(os.getenv("OPENAI_TEMPERATURE")),
-  #max_tokens=int(os.getenv("OPENAI_MAX_TOKENS")),
   top_p=float(os.getenv("OPENAI_TOP_P")),
   frequency_penalty=float(os.getenv("OPENAI_FREQUENCY_PENALTY")),
   presence_penalty=float(os.getenv("OPENAI_PRESENCE_PENALTY"))

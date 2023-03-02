@@ -23,8 +23,8 @@ This feature will also be subject to GitHub rate limits, so be mindful of that.
 
 Tunable parameters are stored in `~/.aai`.
 
-The default model is `text-davinci-003`, 
-which supports both use cases, but can be changed for whatever you're using most.
+The default model is `gpt-3.5-turbo`, colloquially known as ChatGPT, 
+but can be changed for your use case.
 
 For information on other models: https://platform.openai.com/docs/models
 

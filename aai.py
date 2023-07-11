@@ -3,23 +3,25 @@ import sys
 import argparse
 import openai
 from github import Github
+import configparser
 
 import warnings
 warnings.filterwarnings("ignore")
 
+#LOAD CONFIG FROM CONFIG FILE
+openai_model = config.get('openai', 'model')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--pr', help='review a PR', required=False)
 parser.add_argument('--prompt', help='prompt for OpenAI', nargs='+', required=False)
 args = parser.parse_args()
 
-
-max_tokens = int(os.getenv('OPENAI_MAX_TOKENS'))
+max_tokens = int(config.get('openai', 'max_tokens'))
 
 if args.pr is not None:
-  g = Github(os.getenv('AAI_GITHUB_ACCESS_TOKEN'))
-  repo = '/'.join(args.pr.split('/')[3:5])  # TODO: this is dumb, make it smart
-  pull = int(args.pr.split('/')[-1])  # TODO: dumb-ish
+  g = Github(config.get('github', 'access_token'))
+  repo = '/'.join(args.pr.split('/')[3:5])
+  pull = int(args.pr.split('/')[-1])
   pr = g.get_repo(repo).get_pull(pull)
   prompt_pr = ''
   for file in pr.get_files():
@@ -33,14 +35,14 @@ if args.pr is not None:
 if args.prompt is not None:
   args.prompt = ' '.join(args.prompt)
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = config.get('openai', 'api_key')
 response = openai.Completion.create(
-  model=os.getenv('OPENAI_MODEL'),
+  model=openai_model,
   prompt=args.prompt,
   max_tokens=max_tokens,
-  temperature=float(os.getenv('OPENAI_TEMPERATURE')),
-  top_p=float(os.getenv('OPENAI_TOP_P')),
-  frequency_penalty=float(os.getenv('OPENAI_FREQUENCY_PENALTY')),
-  presence_penalty=float(os.getenv('OPENAI_PRESENCE_PENALTY'))
+  temperature=float(config.get('openai', 'temperature')),
+  top_p=float(config.get('openai', 'top_p')),
+  frequency_penalty=float(config.get('openai', 'frequency_penalty')),
+  presence_penalty=float(config.get('openai', 'presence_penalty'))
 )
 print(response['choices'][0]['text'])
